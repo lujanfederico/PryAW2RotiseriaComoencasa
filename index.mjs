@@ -1,23 +1,16 @@
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import express from "express";
+import rutasProductos from "./modulos/productos/rutas.productos.mjs";
 
 const app = express();
-const PORT = 3000;
 
-// Necesario para obtener __dirname en módulos ES
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+app.use(express.json());
 
-// Archivos públicos
-app.use(express.static(path.join(__dirname, 'recursos')));
+app.use(express.static("front"));
 
-// Ruta principal
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'vistas', 'index.html'));
-});
+app.use('/recursos', express.static('recursos'));
 
-// Servidor
-app.listen(PORT, () => {
-    console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
+app.use("/api/productos", rutasProductos);
+
+app.listen(3000, () => {
+    console.log("Servidor funcionando en puerto 3000");
 });

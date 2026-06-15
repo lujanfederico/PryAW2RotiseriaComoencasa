@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Administración de Productos</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <h1>Administración de Productos</h1>
+
+    <form id="formProducto">
+
+        <input type="text" id="nombre" placeholder="Nombre" required>
+
+        <input type="text" id="descripcion" placeholder="Descripción" required>
+
+        <input type="text" id="imagen" placeholder="Imagen" required>
+
+        <input type="number" id="precio" placeholder="Precio" required>
+
+        <button type="submit">Agregar Producto</button>
+
+    </form>
+
+    <hr>
+
+    <div id="productos"></div>
+
+    <script src="admin.js"></script>
+
+</body>
+</html>
