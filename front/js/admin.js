@@ -1,6 +1,51 @@
+console.log("ADMIN JS CARGADO");
+
+
 const URL = "/api/productos";
 const contenedor = document.getElementById("productos");
 let editandoId = null;
+
+
+async function verificarSesion() {
+
+    console.log("Verificando sesión...");
+
+    try {
+
+        const respuesta = await fetch("/api/usuarios/verificar");
+
+        console.log("Estado de respuesta:", respuesta.status);
+
+        const datos = await respuesta.json();
+
+        console.log("Datos recibidos:", datos);
+
+
+        if (!respuesta.ok) {
+
+            console.log("No hay sesión, enviando al login");
+
+            window.location.href = "login.html";
+
+        }
+
+
+    } catch(error) {
+
+        console.log("Error:", error);
+
+        window.location.href = "login.html";
+
+    }
+
+}
+
+
+verificarSesion();
+
+
+
+
 
 async function cargarProductos(){
     const respuesta = await fetch(URL);
@@ -21,6 +66,11 @@ async function cargarProductos(){
     });
 }
 
+
+
+
+
+
 async function eliminarProducto(id){
     if (confirm("¿Estás seguro de que querés eliminar este producto?")) {
         await fetch(`${URL}/${id}`,{
@@ -29,6 +79,12 @@ async function eliminarProducto(id){
         cargarProductos();
     }
 }
+
+
+
+
+
+
 
 async function prepararModificacion(id) {
     const respuesta = await fetch(`${URL}/${id}`);
@@ -79,3 +135,23 @@ document.getElementById("formProducto").addEventListener("submit", async (e)=>{
 });
 
 cargarProductos();
+
+
+
+
+
+window.cerrarSesion = async function () {
+    console.log("Logout clickeado");
+
+    try {
+        await fetch("/api/usuarios/logout", {
+            method: "POST",
+            credentials: "include"
+        });
+
+        window.location.href = "/login.html";
+
+    } catch (error) {
+        console.log("Error en logout:", error);
+    }
+};

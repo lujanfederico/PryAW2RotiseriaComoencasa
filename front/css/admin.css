@@ -63,3 +63,35 @@ button:hover{
     margin-bottom: 8px;
     background-color: #e2e8f0;
 }
+
+
+
+
+
+.header-admin{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:20px;
+
+}
+
+#btnLogout{
+
+    background:#c1121f;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+
+}
+
+#btnLogout:hover{
+
+    background:#9d0208;
+
+}
